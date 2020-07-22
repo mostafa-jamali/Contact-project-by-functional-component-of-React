@@ -19,7 +19,7 @@ function Tr (props) {
                     <td>{props.item.details}</td>
                     <td>
                         <button onClick={()=> handleDelete(props.item.id)} className="btn btn-danger mx-1"><i className='fa fa-trash'/></button>
-                        <button onClick={props.handleShow} className="btn btn-primary mx-1"><i className='fa fa-edit'/></button>
+                        <button className="btn btn-primary mx-1"><i className='fa fa-edit'/></button>
                     </td>
                 </tr>
             </>

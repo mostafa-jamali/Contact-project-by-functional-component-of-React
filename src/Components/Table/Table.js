@@ -29,18 +29,23 @@ function Table (props) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => setShow(true)
+
+    
 
     return (
         <>
             <div className="tableContainer">
-                <div className="col-6 bg-info rounded-lg py-2 my-2">
-                    <label>search:</label>
-                    <input className="rounded border-0 mx-2 input" name={'search'} onChange={chengeHandler} value={search}/>
-                    <i className='fa fa-search'/>
+                <div className="col-12 row justify-content-around pl-5">
+                    <div className="col-6 row align-items-center justify-content-center bg-info rounded-lg py-2 my-2 ml-5">
+                        <label className="mb-0">search:</label>
+                        <input className="rounded border-0 mx-2 input" name={'search'} onChange={chengeHandler} value={search} placeholder="       search contact"/>
+                        <i className='fa fa-search'/>
+                    </div>
+                    <button className="btn btn-info my-3" onClick={handleShow}><i className='fa fa-plus'/></button>
+                    <Editform contacts={contacts} setContacts={setContacts} show={show} setShow={setShow} handleShow={handleShow} handleClose={handleClose}/>
                 </div>
-                <Editform show={show} setShow={setShow} handleShow={handleShow} handleClose={handleClose}/>
-                <table className="table table-striped table-hover border">
+                <table className="table table-responsive col-12 table-striped table-hover border">
                     <thead className="thead-dark">
                         <tr>
                             <th>#</th>
