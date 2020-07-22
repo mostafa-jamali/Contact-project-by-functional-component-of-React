@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/Contact-project-by-functional-component-of-React/static/css/main.2e860ae8.chunk.css",
-    "main.js": "/Contact-project-by-functional-component-of-React/static/js/main.7c113168.chunk.js",
-    "main.js.map": "/Contact-project-by-functional-component-of-React/static/js/main.7c113168.chunk.js.map",
+    "main.css": "/Contact-project-by-functional-component-of-React/static/css/main.69589f0a.chunk.css",
+    "main.js": "/Contact-project-by-functional-component-of-React/static/js/main.94f73a83.chunk.js",
+    "main.js.map": "/Contact-project-by-functional-component-of-React/static/js/main.94f73a83.chunk.js.map",
     "runtime-main.js": "/Contact-project-by-functional-component-of-React/static/js/runtime-main.2973eddb.js",
     "runtime-main.js.map": "/Contact-project-by-functional-component-of-React/static/js/runtime-main.2973eddb.js.map",
     "static/css/2.829c9cb5.chunk.css": "/Contact-project-by-functional-component-of-React/static/css/2.829c9cb5.chunk.css",
-    "static/js/2.123efa02.chunk.js": "/Contact-project-by-functional-component-of-React/static/js/2.123efa02.chunk.js",
-    "static/js/2.123efa02.chunk.js.map": "/Contact-project-by-functional-component-of-React/static/js/2.123efa02.chunk.js.map",
+    "static/js/2.b11e728d.chunk.js": "/Contact-project-by-functional-component-of-React/static/js/2.b11e728d.chunk.js",
+    "static/js/2.b11e728d.chunk.js.map": "/Contact-project-by-functional-component-of-React/static/js/2.b11e728d.chunk.js.map",
     "index.html": "/Contact-project-by-functional-component-of-React/index.html",
-    "precache-manifest.20ac0cfc60b1970e587be03c0fb09199.js": "/Contact-project-by-functional-component-of-React/precache-manifest.20ac0cfc60b1970e587be03c0fb09199.js",
+    "precache-manifest.ed790f314fb85069d451a88dcd0e92e5.js": "/Contact-project-by-functional-component-of-React/precache-manifest.ed790f314fb85069d451a88dcd0e92e5.js",
     "service-worker.js": "/Contact-project-by-functional-component-of-React/service-worker.js",
     "static/css/2.829c9cb5.chunk.css.map": "/Contact-project-by-functional-component-of-React/static/css/2.829c9cb5.chunk.css.map",
-    "static/css/main.2e860ae8.chunk.css.map": "/Contact-project-by-functional-component-of-React/static/css/main.2e860ae8.chunk.css.map",
-    "static/js/2.123efa02.chunk.js.LICENSE.txt": "/Contact-project-by-functional-component-of-React/static/js/2.123efa02.chunk.js.LICENSE.txt"
+    "static/css/main.69589f0a.chunk.css.map": "/Contact-project-by-functional-component-of-React/static/css/main.69589f0a.chunk.css.map",
+    "static/js/2.b11e728d.chunk.js.LICENSE.txt": "/Contact-project-by-functional-component-of-React/static/js/2.b11e728d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2973eddb.js",
     "static/css/2.829c9cb5.chunk.css",
-    "static/js/2.123efa02.chunk.js",
-    "static/css/main.2e860ae8.chunk.css",
-    "static/js/main.7c113168.chunk.js"
+    "static/js/2.b11e728d.chunk.js",
+    "static/css/main.69589f0a.chunk.css",
+    "static/js/main.94f73a83.chunk.js"
   ]
 }
