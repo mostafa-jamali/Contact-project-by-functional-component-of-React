@@ -9,17 +9,13 @@ import Button from 'react-bootstrap/Button';
 import { propTypes } from "react-bootstrap/esm/Image";
 
 
-function Editform({contacts, setContacts, show, setShow,handleShow, handleClose}) {
+function AddForm({contacts, setContacts, show, setShow,handleShow, handleClose}) {
 
     const [newObj, setNewObj] = useState({
-        id: "",
         name: "",
         lastName: "",
         phone: "",
         email: "",
-        address: "",
-        birthday: "",
-        details: "",
     })
     const handleChange= (event)=> {
         const {name, value} = event.target;
@@ -27,32 +23,28 @@ function Editform({contacts, setContacts, show, setShow,handleShow, handleClose}
     }
     const handleAdd = (obj)=>{
         let id = contacts.reduce((initial, item) =>  1 + Math.max(item.id), 0);
-        (obj.name.length > 0) && (obj.lastName.length > 0) && (obj.email.length > 0)
+        (obj.name.length > 0) && (obj.lastName.length > 0) && (obj.phone.length > 0) && (obj.email.length > 0)
         && setContacts([...contacts, {...obj, id}]);
     }
     const handleClear= ()=>{
         setNewObj({
-            id: "",
             name: "",
             lastName: "",
             phone: "",
             email: "",
-            address: "",
-            birthday: "",
-            details: "",
         })
     }
     const handleSubmit = (event) => {
         event.preventDefault();
         handleAdd(newObj);
-        handleClear();
+        // handleClear();
     }
     
     return (
         <>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add/Edit contact</Modal.Title>
+                    <Modal.Title>Add contact</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form onSubmit={handleSubmit} className="d-flex flex-column">
@@ -68,15 +60,6 @@ function Editform({contacts, setContacts, show, setShow,handleShow, handleClose}
 
                         <label htmlFor="email" className="mb-0 mt-2">email:</label>
                         <input type="email" placeholder="Enter email" name="email" onChange={handleChange} className="rounded border"/>
-
-                        <label htmlFor="address" className="mb-0 mt-2">address:</label>
-                        <input type="address" placeholder="Enter address" name="address" onChange={handleChange} className="rounded border"/>
-
-                        <label htmlFor="birthday" className="mb-0 mt-2">birthday:</label>
-                        <input type="number" placeholder="Enter birthday" name="birthday" onChange={handleChange} className="rounded border"/>
-
-                        <label htmlFor="details" className="mb-0 mt-2">details:</label>
-                        <input type="text" placeholder="Enter details" name="details" onChange={handleChange} className="rounded border"/>
 
                         <Modal.Footer>
                             <Button variant="danger" onClick={handleClose}>
@@ -97,4 +80,4 @@ function Editform({contacts, setContacts, show, setShow,handleShow, handleClose}
 
 }
 
-export default Editform;
+export default AddForm;
