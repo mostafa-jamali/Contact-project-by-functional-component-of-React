@@ -22,8 +22,7 @@ function Tr({ contacts, setContacts, item }) {
     };
     const handleEdit = (id) => {
         const trContact = contacts.filter((contact) => contact.id == id);
-        (trContact[0].name.length > 0) && (trContact[0].lastName.length > 0) && (trContact[0].phone.length > 0) && (trContact[0].email.length > 0)
-        && setEditObj(trContact[0]);
+        setEditObj(trContact[0]);
     }
     
     return (

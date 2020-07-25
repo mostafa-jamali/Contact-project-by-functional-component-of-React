@@ -7,6 +7,7 @@ import ModalBody from 'react-bootstrap/ModalBody';
 import ModalFooter from 'react-bootstrap/ModalFooter';
 import Button from 'react-bootstrap/Button';
 import { propTypes } from "react-bootstrap/esm/Image";
+import './validationSpan.css'
 
 
 function AddForm({ contacts, setContacts, show, handleClose }) {
@@ -17,13 +18,42 @@ function AddForm({ contacts, setContacts, show, handleClose }) {
         phone: "",
         email: "",
     })
+    const [errors, setErrors] = useState({
+        name: "",
+        lastName: "",
+        phone: "",
+        email: "",
+    });
+
+    const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+    const validPhoneRegex = RegExp(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g);
+
     const handleChange = (event) => {
         const { name, value } = event.target;
         setNewObj({ ...newObj, [name]: value });
+
+        switch (name) {
+            case "name":
+                errors.name =
+                    value.length < 3 ? "Name must be 3 characters long!" : "";
+                break;
+            case "lastName":
+                errors.lastName =
+                    value.length < 3 ? "LastName must be 3 characters long!" : "";
+                break;
+            case "phone":
+                errors.phone = validPhoneRegex.test(value) ? "" : "phone must be Number!";
+                break;
+            case "email":
+                errors.email = validEmailRegex.test(value) ? "" : "Email is not valid!";
+                break;
+            default:
+                break;
+        }
     }
     const handleAdd = (obj) => {
         let id = contacts.reduce((initial, item) => 1 + Math.max(item.id), 0);
-        (obj.name.length > 0) && (obj.lastName.length > 0) && (obj.phone.length > 0) && (obj.email.length > 0)
+        (obj.name.trim().length > 0) && (obj.lastName.trim().length > 0) && (obj.phone.trim().length > 0) && (obj.email.trim().length > 0)
             && setContacts([...contacts, { ...obj, id }]);
     }
     const handleClear = () => {
@@ -50,15 +80,19 @@ function AddForm({ contacts, setContacts, show, handleClose }) {
 
                         <label htmlFor="name" className="mb-0 mt-0">name:</label>
                         <input type="text" placeholder="Enter name" name="name" value={newObj.name} onChange={handleChange} className="rounded border" />
+                        {<span className="error">{errors.name}</span>}
 
                         <label htmlFor="latName" className="mb-0 mt-2">latName:</label>
                         <input type="text" placeholder="Enter lastName" name="lastName" value={newObj.lastName} onChange={handleChange} className="rounded border" />
+                        {<span className="error">{errors.lastName}</span>}
 
                         <label htmlFor="phone" className="mb-0 mt-2">phone:</label>
                         <input type="phone" placeholder="Enter phone" name="phone" value={newObj.phone} onChange={handleChange} className="rounded border" />
+                        {<span className="error">{errors.phone}</span>}
 
                         <label htmlFor="email" className="mb-0 mt-2">email:</label>
                         <input type="email" placeholder="Enter email" name="email" value={newObj.email} onChange={handleChange} className="rounded border" />
+                        {<span className="error">{errors.email}</span>}
 
                         <Modal.Footer>
                             <Button variant="danger" onClick={handleClose}>
