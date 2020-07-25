@@ -44,7 +44,7 @@ function Table () {
                         <button className="btn btn-light py-1 m-1 col-3 col-sm-2 col-lg-2"><i className='fa fa-search'/></button>
                     </div>
                     <button className="btn btn-info my-3" onClick={handleShow}><i className='fa fa-plus'/></button>
-                    <AddForm contacts={contacts} setContacts={setContacts} show={show} setShow={setShow} handleShow={handleShow} handleClose={handleClose}/>
+                    <AddForm contacts={contacts} setContacts={setContacts} show={show} handleClose={handleClose}/>
                 </div>
                 <table className="table col-12 table-striped table-hover border">
                     <thead className="thead-dark">

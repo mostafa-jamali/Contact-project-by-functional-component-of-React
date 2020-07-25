@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import { propTypes } from "react-bootstrap/esm/Image";
 
 
-function AddForm({contacts, setContacts, show, setShow,handleShow, handleClose}) {
+function AddForm({ contacts, setContacts, show, handleClose }) {
 
     const [newObj, setNewObj] = useState({
         name: "",
@@ -17,16 +17,16 @@ function AddForm({contacts, setContacts, show, setShow,handleShow, handleClose})
         phone: "",
         email: "",
     })
-    const handleChange= (event)=> {
-        const {name, value} = event.target;
-        setNewObj({...newObj, [name]:value});
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setNewObj({ ...newObj, [name]: value });
     }
-    const handleAdd = (obj)=>{
-        let id = contacts.reduce((initial, item) =>  1 + Math.max(item.id), 0);
+    const handleAdd = (obj) => {
+        let id = contacts.reduce((initial, item) => 1 + Math.max(item.id), 0);
         (obj.name.length > 0) && (obj.lastName.length > 0) && (obj.phone.length > 0) && (obj.email.length > 0)
-        && setContacts([...contacts, {...obj, id}]);
+            && setContacts([...contacts, { ...obj, id }]);
     }
-    const handleClear= ()=>{
+    const handleClear = () => {
         setNewObj({
             name: "",
             lastName: "",
@@ -37,9 +37,8 @@ function AddForm({contacts, setContacts, show, setShow,handleShow, handleClose})
     const handleSubmit = (event) => {
         event.preventDefault();
         handleAdd(newObj);
-        // handleClear();
     }
-    
+
     return (
         <>
             <Modal show={show} onHide={handleClose}>
@@ -50,16 +49,16 @@ function AddForm({contacts, setContacts, show, setShow,handleShow, handleClose})
                     <form onSubmit={handleSubmit} className="d-flex flex-column">
 
                         <label htmlFor="name" className="mb-0 mt-0">name:</label>
-                        <input type="text" placeholder="Enter name" name="name" onChange={handleChange} className="rounded border"/>
+                        <input type="text" placeholder="Enter name" name="name" value={newObj.name} onChange={handleChange} className="rounded border" />
 
                         <label htmlFor="latName" className="mb-0 mt-2">latName:</label>
-                        <input type="text" placeholder="Enter lastName" name="lastName" onChange={handleChange} className="rounded border"/>
+                        <input type="text" placeholder="Enter lastName" name="lastName" value={newObj.lastName} onChange={handleChange} className="rounded border" />
 
                         <label htmlFor="phone" className="mb-0 mt-2">phone:</label>
-                        <input type="phone" placeholder="Enter phone" name="phone" onChange={handleChange} className="rounded border"/>
+                        <input type="phone" placeholder="Enter phone" name="phone" value={newObj.phone} onChange={handleChange} className="rounded border" />
 
                         <label htmlFor="email" className="mb-0 mt-2">email:</label>
-                        <input type="email" placeholder="Enter email" name="email" onChange={handleChange} className="rounded border"/>
+                        <input type="email" placeholder="Enter email" name="email" value={newObj.email} onChange={handleChange} className="rounded border" />
 
                         <Modal.Footer>
                             <Button variant="danger" onClick={handleClose}>

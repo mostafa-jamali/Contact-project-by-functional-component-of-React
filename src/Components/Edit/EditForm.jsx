@@ -9,30 +9,15 @@ import Button from 'react-bootstrap/Button';
 import { propTypes } from "react-bootstrap/esm/Image";
 
 
-function EditForm({contacts, setContacts, show,handleShowEdit, handleCloseEdit}) {
+function EditForm({ contacts, setContacts, show, editObj, setEditObj, handleCloseEdit }) {
 
-    const [editObj, setEditObj] = useState({
-        name: "",
-        lastName: "",
-        phone: "",
-        email: ""
-    })
-    const handleChange= (event)=> {
-        const {name, value} = event.target;
+    const handleChange = (event) => {
+        const { name, value } = event.target;
         setEditObj({...editObj, [name]:value});
+
     }
-    
-    // const handleEdit = (obj)=>{
-    //     // let edit = contacts.map((item)=> item.id == obj.id);
-    //     setEditObj({
-    //         name: obj.name,
-    //         lastName: obj.lastName,
-    //         phone: obj.phone,
-    //         email: obj.email
-    //     })
-    //     // setContacts([...contacts, {...editObj}]);
-    // }
-    const handleClear= ()=>{
+
+    const handleClear = () => {
         setEditObj({
             name: "",
             lastName: "",
@@ -42,10 +27,18 @@ function EditForm({contacts, setContacts, show,handleShowEdit, handleCloseEdit})
     }
     const handleSubmit = (event) => {
         event.preventDefault();
-        // handleEdit(obj);
-        // handleClear();
+        setContacts([...contacts.map((item) => {
+            if (item.id == editObj.id) {
+                item.name = editObj.name;
+                item.lastName = editObj.lastName;
+                item.phone = editObj.phone;
+                item.email = editObj.email;
+                // Object.keys(item).length >0;
+                return item;
+            } else return item;
+        })]);
     }
-    
+
     return (
         <>
             <Modal show={show} onHide={handleCloseEdit}>
@@ -56,16 +49,16 @@ function EditForm({contacts, setContacts, show,handleShowEdit, handleCloseEdit})
                     <form onSubmit={handleSubmit} className="d-flex flex-column">
 
                         <label htmlFor="name" className="mb-0 mt-0">name:</label>
-                        <input type="text" placeholder="Enter name" name="name" onChange={handleChange} className="rounded border"/>
+                        <input type="text" placeholder="Enter name" name="name" value={editObj.name} onChange={handleChange} className="rounded border" />
 
                         <label htmlFor="latName" className="mb-0 mt-2">latName:</label>
-                        <input type="text" placeholder="Enter lastName" name="lastName" onChange={handleChange} className="rounded border"/>
+                        <input type="text" placeholder="Enter lastName" name="lastName" value={editObj.lastName} onChange={handleChange} className="rounded border" />
 
                         <label htmlFor="phone" className="mb-0 mt-2">phone:</label>
-                        <input type="phone" placeholder="Enter phone" name="phone" onChange={handleChange} className="rounded border"/>
+                        <input type="phone" placeholder="Enter phone" name="phone" value={editObj.phone} onChange={handleChange} className="rounded border" />
 
                         <label htmlFor="email" className="mb-0 mt-2">email:</label>
-                        <input type="email" placeholder="Enter email" name="email" onChange={handleChange} className="rounded border"/>
+                        <input type="email" placeholder="Enter email" name="email" value={editObj.email} onChange={handleChange} className="rounded border" />
 
                         <Modal.Footer>
                             <Button variant="danger" onClick={handleCloseEdit}>
