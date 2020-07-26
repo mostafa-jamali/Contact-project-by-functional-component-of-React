@@ -18,6 +18,7 @@ function AddForm({ contacts, setContacts, show, handleClose }) {
         phone: "",
         email: "",
     })
+    const [add, setAdd] = useState(true);
     const [errors, setErrors] = useState({
         name: "",
         lastName: "",
@@ -32,20 +33,32 @@ function AddForm({ contacts, setContacts, show, handleClose }) {
         const { name, value } = event.target;
         setNewObj({ ...newObj, [name]: value });
 
+        setAdd(true);
+
         switch (name) {
             case "name":
-                errors.name =
-                    value.length < 3 ? "Name must be 3 characters long!" : "";
+                if (value.trim().length < 3) {
+                    setAdd(false);
+                    errors.name = "Name must be 3 characters long!";
+                } else errors.name = ""
                 break;
             case "lastName":
-                errors.lastName =
-                    value.length < 3 ? "LastName must be 3 characters long!" : "";
+                if (value.trim().length < 3) {
+                    setAdd(false);
+                    errors.lastName = "Name must be 3 characters long!";
+                } else errors.lastName = ""
                 break;
             case "phone":
-                errors.phone = validPhoneRegex.test(value) ? "" : "phone must be Number!";
+                if (!validPhoneRegex.test(value)) {
+                    setAdd(false);
+                    errors.phone = "Phone is not valid!";
+                } else errors.phone = ""
                 break;
             case "email":
-                errors.email = validEmailRegex.test(value) ? "" : "Email is not valid!";
+                if (!validEmailRegex.test(value)) {
+                    setAdd(false);
+                    errors.email = "Email is not valid!";
+                } else errors.email = ""
                 break;
             default:
                 break;
@@ -53,8 +66,7 @@ function AddForm({ contacts, setContacts, show, handleClose }) {
     }
     const handleAdd = (obj) => {
         let id = contacts.reduce((initial, item) => 1 + Math.max(item.id), 0);
-        (obj.name.trim().length > 0) && (obj.lastName.trim().length > 0) && (obj.phone.trim().length > 0) && (obj.email.trim().length > 0)
-            && setContacts([...contacts, { ...obj, id }]);
+        setContacts([...contacts, { ...obj, id }]);
     }
     const handleClear = () => {
         setNewObj({
@@ -66,7 +78,10 @@ function AddForm({ contacts, setContacts, show, handleClose }) {
     }
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleAdd(newObj);
+        if (add == true) {
+            handleAdd(newObj);
+            handleClear();
+        }
     }
 
     return (

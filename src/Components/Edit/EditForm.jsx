@@ -19,6 +19,8 @@ function EditForm({ contacts, setContacts, show, editObj, setEditObj, handleClos
         email: "",
 
     });
+    const [edit, setEdit] = useState(true);
+
 
     const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
     const validPhoneRegex = RegExp(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g);
@@ -27,20 +29,32 @@ function EditForm({ contacts, setContacts, show, editObj, setEditObj, handleClos
         const { name, value } = event.target;
         setEditObj({ ...editObj, [name]: value });
 
+        setEdit(true);
+
         switch (name) {
             case "name":
-                errors.name =
-                    value.length < 3 ? "Name must be 3 characters long!" : "";
+                if (value.trim().length < 3) {
+                    setEdit(false);
+                    errors.name = "Name must be 3 characters long!";
+                } else errors.name = ""
                 break;
             case "lastName":
-                errors.lastName =
-                    value.length < 3 ? "LastName must be 3 characters long!" : "";
+                if (value.trim().length < 3) {
+                    setEdit(false);
+                    errors.lastName = "Name must be 3 characters long!";
+                } else errors.lastName = ""
                 break;
             case "phone":
-                errors.phone = validPhoneRegex.test(value) ? "" : "phone must be Number!";
+                if (!validPhoneRegex.test(value)) {
+                    setEdit(false);
+                    errors.phone = "Phone is not valid!";
+                } else errors.phone = ""
                 break;
             case "email":
-                errors.email = validEmailRegex.test(value) ? "" : "Email is not valid!";
+                if (!validEmailRegex.test(value)) {
+                    setEdit(false);
+                    errors.email = "Email is not valid!";
+                } else errors.email = ""
                 break;
             default:
                 break;
@@ -58,11 +72,12 @@ function EditForm({ contacts, setContacts, show, editObj, setEditObj, handleClos
     const handleSubmit = (event) => {
         event.preventDefault();
         setContacts([...contacts.map((item) => {
-            if (item.id == editObj.id && (editObj.name.trim().length > 0 && editObj.lastName.trim().length > 0 && editObj.phone.trim().length > 0 && editObj.email.trim().length > 0)) {
+            if ((item.id == editObj.id) && (edit == true)) {
                 item.name = editObj.name;
                 item.lastName = editObj.lastName;
                 item.phone = editObj.phone;
                 item.email = editObj.email;
+                handleClear();
                 return editObj;
             } else return item;
         })]);
