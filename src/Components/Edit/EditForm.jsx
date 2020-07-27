@@ -33,15 +33,15 @@ function EditForm({ contacts, setContacts, show, editObj, setEditObj, handleClos
 
         switch (name) {
             case "name":
-                if (value.trim().length < 3) {
+                if (value.trim().length < 1) {
                     setEdit(false);
-                    errorsEdit.name = "Name must be 3 characters long!";
+                    errorsEdit.name = "Name must be 1 characters (without space) long!";
                 } else errorsEdit.name = ""
                 break;
             case "lastName":
-                if (value.trim().length < 3) {
+                if (value.trim().length < 1) {
                     setEdit(false);
-                    errorsEdit.lastName = "Name must be 3 characters long!";
+                    errorsEdit.lastName = "Name must be 1 characters (without space) long!";
                 } else errorsEdit.lastName = ""
                 break;
             case "phone":
@@ -78,6 +78,7 @@ function EditForm({ contacts, setContacts, show, editObj, setEditObj, handleClos
                 item.phone = editObj.phone;
                 item.email = editObj.email;
                 handleClear();
+                handleCloseEdit();
                 return editObj;
             } else return item;
         })]);

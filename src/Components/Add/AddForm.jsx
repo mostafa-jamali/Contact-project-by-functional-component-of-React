@@ -32,18 +32,20 @@ function AddForm({ contacts, setContacts, show, handleClose }) {
     const handleChange = (event) => {
         const { name, value } = event.target;
         setNewObj({ ...newObj, [name]: value });
-        setAdd(true)
+
+        setAdd(true);
+
         switch (name) {
             case "name":
-                if (value.trim().length < 3 || value=="") {
+                if (value.trim().length < 1) {
                     setAdd(false);
-                    errors.name = "Name must be 3 characters long!";
+                    errors.name = "Name must be 1 characters (without space) long!";
                 } else errors.name = ""
                 break;
             case "lastName":
-                if (value.trim().length < 3) {
+                if (value.trim().length < 1) {
                     setAdd(false);
-                    errors.lastName = "Name must be 3 characters long!";
+                    errors.lastName = "Name must be 1 characters (without space) long!";
                 } else errors.lastName = ""
                 break;
             case "phone":
@@ -61,14 +63,12 @@ function AddForm({ contacts, setContacts, show, handleClose }) {
             default:
                 break;
         }
-        
     }
     const handleAdd = (obj) => {
-        
         let id = contacts.reduce((initial, item) => 1 + Math.max(item.id), 0);
-        
         setContacts([...contacts, { ...obj, id }]);
     }
+
     const handleClear = () => {
         setNewObj({
             name: "",
@@ -77,17 +77,18 @@ function AddForm({ contacts, setContacts, show, handleClose }) {
             email: "",
         })
     }
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
         if (add == true) {
-            if(newObj.name!="" && newObj.lastName!="" && newObj.phone!="" && newObj.email!="")
-            {
-            // handleClear();
-             handleAdd(newObj);
+            if (newObj.name != "" && newObj.lastName != "" && newObj.phone != "" && newObj.email != "") {
+                handleAdd(newObj);
+                handleClose();
+                handleClear();
             }
-             
-        } 
+
+        }
     }
 
     return (

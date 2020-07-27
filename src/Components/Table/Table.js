@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import Search from '../Search/Search'
 import Tr from '../Contacts/Tr';
 import Editform from '../Add/AddForm';
 import '../Table/table.css';
@@ -18,35 +19,25 @@ function Table() {
 
     ]);
     const [search, setSearch] = useState("");
-
-    const chengeHandler = (e) => {
-        setSearch(e.target.value)
-    }
-    let newTr = contacts.filter(item => (
-        item.name.toLowerCase().startsWith(search.toLowerCase()) ||
-        item.phone.startsWith(search)
-    ))
-
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true)
+    const handleShow = () => setShow(true);
+    const chengeHandler = (e) => {
+        setSearch(e.target.value)
+    };
 
-
+    let newTr = contacts.filter(item => (
+        item.name.toLowerCase().startsWith(search.toLowerCase()) ||
+        item.phone.startsWith(search)
+    ));
 
     return (
         <>
-            <div className="tableContainer table-responsive">
-                <div className="col-12 row justify-content-around pl-5">
-                    <div className="col-10 col-md-8 col-lg-6 mx-auto row align-items-center justify-content-center bg-info rounded-lg py-2 my-2 ml-5">
-                        <label className="mb-0 col-6 col-sm-8 col-lg-3">search:</label>
-                        <input className="rounded border-0  col-12 col-sm-8 col-lg-6" name={'search'} onChange={chengeHandler} value={search} placeholder="search contact" />
-                        <button className="btn btn-light py-1 m-1 col-3 col-sm-2 col-lg-2"><i className='fa fa-search' /></button>
-                    </div>
-                    <button className="btn btn-info my-3" onClick={handleShow}><i className='fa fa-plus' /></button>
-                    <AddForm contacts={contacts} setContacts={setContacts} show={show} handleClose={handleClose} />
-                </div>
-                <div className="table-content">
+            <div className="tableContainer ">
+                <Search search={search} setSearch={setSearch} chengeHandler={chengeHandler} handleShow={handleShow} />
+                <AddForm contacts={contacts} setContacts={setContacts} show={show} handleClose={handleClose} />
+                <div className="table-content table-responsive">
                     <table className="table col-12 table-striped table-hover border">
                         <thead className="thead-dark">
                             <tr>
