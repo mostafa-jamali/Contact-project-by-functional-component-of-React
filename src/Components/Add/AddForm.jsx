@@ -32,12 +32,10 @@ function AddForm({ contacts, setContacts, show, handleClose }) {
     const handleChange = (event) => {
         const { name, value } = event.target;
         setNewObj({ ...newObj, [name]: value });
-
-        setAdd(true);
-
+        setAdd(true)
         switch (name) {
             case "name":
-                if (value.trim().length < 3) {
+                if (value.trim().length < 3 || value=="") {
                     setAdd(false);
                     errors.name = "Name must be 3 characters long!";
                 } else errors.name = ""
@@ -63,9 +61,12 @@ function AddForm({ contacts, setContacts, show, handleClose }) {
             default:
                 break;
         }
+        
     }
     const handleAdd = (obj) => {
+        
         let id = contacts.reduce((initial, item) => 1 + Math.max(item.id), 0);
+        
         setContacts([...contacts, { ...obj, id }]);
     }
     const handleClear = () => {
@@ -78,10 +79,15 @@ function AddForm({ contacts, setContacts, show, handleClose }) {
     }
     const handleSubmit = (event) => {
         event.preventDefault();
+
         if (add == true) {
-            handleAdd(newObj);
-            handleClear();
-        }
+            if(newObj.name!="" && newObj.lastName!="" && newObj.phone!="" && newObj.email!="")
+            {
+            // handleClear();
+             handleAdd(newObj);
+            }
+             
+        } 
     }
 
     return (

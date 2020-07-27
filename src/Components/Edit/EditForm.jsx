@@ -12,7 +12,7 @@ import './validationSpan.css'
 
 function EditForm({ contacts, setContacts, show, editObj, setEditObj, handleCloseEdit }) {
 
-    const [errors, setErrors] = useState({
+    const [errorsEdit, setErrorsEdit] = useState({
         name: "",
         lastName: "",
         phone: "",
@@ -35,26 +35,26 @@ function EditForm({ contacts, setContacts, show, editObj, setEditObj, handleClos
             case "name":
                 if (value.trim().length < 3) {
                     setEdit(false);
-                    errors.name = "Name must be 3 characters long!";
-                } else errors.name = ""
+                    errorsEdit.name = "Name must be 3 characters long!";
+                } else errorsEdit.name = ""
                 break;
             case "lastName":
                 if (value.trim().length < 3) {
                     setEdit(false);
-                    errors.lastName = "Name must be 3 characters long!";
-                } else errors.lastName = ""
+                    errorsEdit.lastName = "Name must be 3 characters long!";
+                } else errorsEdit.lastName = ""
                 break;
             case "phone":
                 if (!validPhoneRegex.test(value)) {
                     setEdit(false);
-                    errors.phone = "Phone is not valid!";
-                } else errors.phone = ""
+                    errorsEdit.phone = "Phone is not valid!";
+                } else errorsEdit.phone = ""
                 break;
             case "email":
                 if (!validEmailRegex.test(value)) {
                     setEdit(false);
-                    errors.email = "Email is not valid!";
-                } else errors.email = ""
+                    errorsEdit.email = "Email is not valid!";
+                } else errorsEdit.email = ""
                 break;
             default:
                 break;
@@ -94,19 +94,19 @@ function EditForm({ contacts, setContacts, show, editObj, setEditObj, handleClos
 
                         <label htmlFor="name" className="mb-0 mt-0">name:</label>
                         <input type="text" placeholder="Enter name" name="name" value={editObj.name} onChange={handleChange} className="rounded border" />
-                        {<span className="error">{errors.name}</span>}
+                        {<span className="error">{errorsEdit.name}</span>}
 
                         <label htmlFor="latName" className="mb-0 mt-2">latName:</label>
                         <input type="text" placeholder="Enter lastName" name="lastName" value={editObj.lastName} onChange={handleChange} className="rounded border" />
-                        {<span className="error">{errors.lastName}</span>}
+                        {<span className="error">{errorsEdit.lastName}</span>}
 
                         <label htmlFor="phone" className="mb-0 mt-2">phone:</label>
                         <input type="phone" placeholder="Enter phone" name="phone" value={editObj.phone} onChange={handleChange} className="rounded border" />
-                        {<span className="error">{errors.phone}</span>}
+                        {<span className="error">{errorsEdit.phone}</span>}
 
                         <label htmlFor="email" className="mb-0 mt-2">email:</label>
                         <input type="email" placeholder="Enter email" name="email" value={editObj.email} onChange={handleChange} className="rounded border" />
-                        {<span className="error">{errors.email}</span>}
+                        {<span className="error">{errorsEdit.email}</span>}
 
                         <Modal.Footer>
                             <Button variant="danger" onClick={handleCloseEdit}>
